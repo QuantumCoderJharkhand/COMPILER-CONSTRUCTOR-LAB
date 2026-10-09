@@ -1,0 +1,53 @@
+#include <iostream>
+#include <string>
+using namespace std;
+
+void expand(string macro)
+{
+    if (macro == "START")
+    {
+        cout << "MOV A,B" << endl;
+
+        expand("DISPLAY");
+    }
+    else if (macro == "DISPLAY")
+    {
+        cout << "MOV R1,R2" << endl;
+    }
+}
+
+int main()
+{
+    string program[] =
+    {
+        "START MACRO",
+        "MOV A,B",
+        "DISPLAY",
+        "MEND",
+        "DISPLAY MACRO",
+        "MOV R1,R2",
+        "MEND",
+        "START",
+        "END"
+    };
+
+    int i;
+
+    cout << endl;
+    cout << "Expanded program:" << endl;
+    cout << "-----------------" << endl;
+
+    for (i = 0; i < 10; i++)
+    {
+        if (program[i] == "START")
+        {
+            expand("START");
+        }
+        else if (program[i] == "END")
+        {
+            cout << "END" << endl;
+        }
+    }
+
+    return 0;
+}
